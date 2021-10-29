@@ -770,7 +770,9 @@ input, select, textarea {
 		dl dd {
 			margin-left: 2rem;
 		}
-
+    li {
+        width: 160px;
+    }
 /* Actions */
 
 	ul.actions {
