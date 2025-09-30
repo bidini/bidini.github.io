@@ -1740,24 +1740,24 @@ input, select, textarea {
     }
 }
 
-.about-bottom-image {
-    float: right;
-    max-width: 400px;
-    margin: 20px 0 20px 20px;
+.about-bottom-images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 30px;
 }
 
-.about-bottom-image img {
+.about-bottom-images img {
     width: 100%;
     height: auto;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    object-fit: cover;
 }
 
 @media (max-width: 768px) {
-    .about-bottom-image {
-        float: none;
-        max-width: 100%;
-        margin: 20px 0;
-        text-align: center;
+    .about-bottom-images {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 }
