@@ -67,49 +67,118 @@ src="https://www.youtube.com/embed/0_N8eGQ6_7w">
                                 <p style="text-align:center;"> <img src="images/aldachildo_leslicilla.jpg" width="400" class="center"></p>
 							</article>
 
-						<!-- Work -->
-							<article id="research">
-								<h2 class="major">research</h2>
-                                <h4> Tidal theory of the gas giant planets </h4>
-                                <p align="justify"> 
-                                 Since 2016, the Juno spacecraft has been orbiting Jupiter and collecting a unique data set of Jupiter's tidal Love numbers, namely the tidal response of Jupiter to the masses of the Galilean satellites in orbit around Jupiter. In a pioneering work, I further developed the theory of dynamical tides applied to gas giant planets (Idini and Stevenson, 2021), a body of knowledge that had not been touched since 1984 (Vorontsov+, 1984). In this theoretical rebirth of Jovian dynamical tides, I showed that the tidal Love number k2 measured by Juno was compatible with a modification on the tidal flow produced by the Coriolis force in a rapidly rotating gas giant planet (Idini and Stevenson, 2021). Paired with the Juno observation, these theoretical results constitute the first detection of dynamical tides in a gas giant planet.
-                                </p>
+<!-- Work -->
+<article id="research">
+	<h2 class="major">research</h2>
+	
 
-                                <p align="justify"> 
-                                Additional Love numbers were reported by Juno after the arrival of the k2 retrievals. The high-degree tides represented in k42 are not only harder to observe, but are also harder to interpret. I applied first-order perturbation theory to develop a fully analytical theory to illuminate the interpretation of k42 (Idini and Stevenson, 2022a). This theory shows how the oblate figure of Jupiter resulting from rapid rotation couples the tides to the rotational response, resulting in an order of magnitude enhancement in k42 (Wahl+, 2020, Idini and Stevenson, 2022a). The resulting k42 enhancement gives rise to an anomaly after comparing models with the Juno k42 observation. 
-                                </p>
+<style>
+#research .nav-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 10px;
+}
 
-								<span class="image main"><img src="images/juno_jup_shorter.jpg" alt="" /><figcaption>Jupiter's South pole as revealed by Juno (NASA/JPL-Caltech/SwRI/MSSS).</figcaption></span>
+#research .nav-grid a {
+	padding: 10px;
+	background-color: rgba(255,255,255,0.03);
+	border-radius: 3px;
+	text-decoration: none;
+	border-left: 3px solid rgba(255,255,255,0.3);
+	transition: all 0.3s;
+}
 
-                                <h4> The tidal imprint of a dilute core hosted in Jupiter </h4>
-                                <p align="justify">
-                                In the traditional view of gas giant planet interiors, an envelope of H-He fluid covers a compact core of rocky and icy material. This traditional view nicely emerges from the standard model of planet formation via core accretion. However, even to this day, no geophysical evidence exists to validate the traditional view. 
-                                </p>
-                                <p align="justify">
-                                The zonal gravitational field (i.e., non tidal) observed by Juno suggests that Jupiter hosts a dilute core that may extend as far as ~0.6R (Militzer+, 2022). A less extended dilute core could also explain the data when using a different equation of state for the H-He fluid (Miguel+, 2022). Avoiding the uncertainties related to the equation of state, I used Jovian dynamical tides and normal modes to show that internal gravity waves trapped in an extended dilute core (~0.7R) reconcile the anomaly in Juno's k42 observation (Idini and Stevenson, 2022b). This proposed scenario invokes a resonance between Jupiter's internal gravity waves and the orbital motion of the satellite Io. 
-                                </p>
-								<span class="image main"><img src="images/jup_models.png" alt="" /><figcaption> What kind of core does Jupiter have? (Idini 2022)</figcaption></span>
+#research .nav-grid a:hover {
+	background-color: rgba(255,255,255,0.08);
+	border-left-color: rgba(255,255,255,0.6);
+}
 
-                                <h4> Theoretical and computational earthquake mechanics </h4>
-                                <p align="justify"> The nucleation, propagation, and arrest of earthquakes remains a fundamental but still unsolved problem in geophysics. Motivated by seismological and geodetic observations of rock damage near fault zones, I expanded a spectral boundary integral method (Luo+, 2017) to numerically model earthquake cycles and rupture propagation in an elastic medium that accounts for the damaged rock that surrounds fault zones. My work has identified a new mechanism to earthquake pulses, a common rupture propagation mode observed during large destructive earthquakes (Idini and Ampuero, 2020). </p>
+@media (max-width: 768px) {
+	#research .nav-grid {
+		grid-template-columns: 1fr;
+	}
+}
+</style>
 
-                                <span class="image main"><img src="images/slip.png" alt="" /><figcaption>Spatiotemporal evolution of slip velocity in the characteristic event of an intact homogeneous medium, a low-velocity fault zone, and an intact homogeneous medium with ten times smaller nucleation length.</figcaption></span>
+<!-- Navigation Menu -->
+<div style="background-color: rgba(255,255,255,0.05); padding: 20px; margin-bottom: 30px; border-radius: 5px;">
+	<h4 style="margin-top: 0; margin-bottom: 15px;">Research Topics</h4>
+	<div class="nav-grid">
+		<a href="#titan-ocean">Resonant stratification in Titan's ocean</a>
+		<a href="#tidal-theory">Tidal theory of gas giant planets</a>
+		<a href="#dilute-core">Tidal imprint of Jupiter's dilute core</a>
+		<a href="#earthquake-mechanics">Earthquake mechanics</a>
+		<a href="#ground-motion">Earthquake ground-motion characterization</a>
+		<a href="#ridgecrest">Spaceborne earthquake reconstruction</a>
+	</div>
+</div>
 
-                                <h4> Earthquake ground-motion characterization </h4>
-                                <p align="justify"> 
-                                Active seismic regions require accurate characterizations of earthquake ground motion to minimize human and material losses during potentially destructive events. I built a statistical model to forecast the ground motion produced during destructive earthquakes in Chile that is routinely used in seismic hazard studies (Idini+, 2017).
-                                </p> 
-                                <span class="image main"><img src="images/chilequake_shorter.jpg" alt="" /><figcaption>Valdivia residents explore a crack caused by the <a href="https://en.wikipedia.org/wiki/1960_Valdivia_earthquake">1960 Chile earthquake</a> (STF/AFP/Getty).</figcaption></span>
+	<h4 id="titan-ocean"> Resonant stratification in Titan's global ocean </h4>
+	<p align="justify"> 
+	The Cassini mission's measurement of Titan's tidal Love number k₂ = 0.616 ± 0.067 presented a puzzle: the observed value sits three standard deviations above predictions for a pure water ocean overlain by an elastic ice shell. While a highly viscous ocean floor or elevated bulk ocean density could potentially explain the discrepancy, these scenarios require extreme conditions—either unrealistically low ice viscosity or salt concentrations exceeding those of Earth's oceans.
+	</p>
+	<p align="justify"> 
+	This work developed an alternative interpretation invoking resonant excitation of internal gravity waves in a stably stratified ocean (Idini and Nimmo, 2024). When Titan's ocean contains vertical salinity gradients—with denser, saltier water at depth—it supports internal gravity waves (g-modes) that can be resonantly driven by eccentricity tides if their natural frequencies align with Titan's orbital period. The analysis shows that even modest stratification (mean salinity below 5 g/kg, comparable to Earth's oceans) can produce k₂ enhancements of 15–45%, sufficient to reconcile the Cassini observation without requiring extreme ocean properties. The resonance manifests as tens of meters of additional surface displacement riding atop the equilibrium tide, while deep in the ocean interior, horizontal fluid velocities reach several meters per second—large enough to be dynamically significant yet below the threshold for nonlinear wave breaking.
+	</p>
+	<p align="justify"> 
+	The mechanism requires explaining how Titan established and maintains such a resonance. Two pathways emerge: secular cooling causes progressive ocean freezing, increasing the Brunt-Väisälä frequency until a g-mode crosses the tidal frequency; alternatively, outward orbital migration continuously sweeps Titan through potential resonances as the tidal forcing frequency drifts. In the freezing scenario, the resonance can become self-sustaining—tidal heating in the resonant ocean produces approximately 6 × 10¹¹ W, comparable to Titan's radiogenic heating, slowing further freezing and locking the system near the resonance. This framework extends beyond Titan: upcoming measurements of Europa's k₂ by Europa Clipper and Ganymede's multi-frequency tidal response by JUICE will test whether resonant stratification operates widely among ocean worlds, and whether tidal observations can probe the otherwise inaccessible density structure of subsurface oceans.
+	</p>
+	
+	<h4 id="tidal-theory"> Tidal theory of the gas giant planets </h4>
+	<p align="justify"> 
+	Since 2016, the Juno spacecraft has been orbiting Jupiter and collecting a unique data set of Jupiter's tidal Love numbers, namely the tidal response of Jupiter to the masses of the Galilean satellites in orbit around Jupiter. In a pioneering work, this work further developed the theory of dynamical tides applied to gas giant planets (Idini and Stevenson, 2021), a body of knowledge that had not been touched since 1984 (Vorontsov et al., 1984). In this theoretical rebirth of Jovian dynamical tides, the analysis showed that the tidal Love number k₂ measured by Juno was compatible with a modification on the tidal flow produced by the Coriolis force in a rapidly rotating gas giant planet (Idini and Stevenson, 2021). Paired with the Juno observation, these theoretical results constitute the first detection of dynamical tides in a gas giant planet.
+	</p>
 
-                                <h4> Spaceborne reconstruction of earthquake sources </h4>
-                                <p align="justify">
-                                After the 2019 Ridgecrest earthquake that ended ~20 yr of seismic quiescence in California, I produced a reconstruction of coseismic fault slip using Bayesian methods, satellite radar maps of surface deformation, and GPS displacements (Ross+, 2019). This model has become a prime reference to the characterization of this large and complicated earthquake.
-                                </p>
+	<p align="justify"> 
+	Additional Love numbers were reported by Juno after the arrival of the k₂ retrievals. The high-degree tides represented in k₄₂ are not only harder to observe, but are also harder to interpret. First-order perturbation theory was applied to develop a fully analytical theory to illuminate the interpretation of k₄₂ (Idini and Stevenson, 2022a). This theory shows how the oblate figure of Jupiter resulting from rapid rotation couples the tides to the rotational response, resulting in an order of magnitude enhancement in k₄₂ (Wahl et al., 2020, Idini and Stevenson, 2022a). The resulting k₄₂ enhancement gives rise to an anomaly after comparing models with the Juno k₄₂ observation.
+	</p>
 
-                                
-                                <span class="image main"><img src="images/ridgecrest.jpg" alt="" /><figcaption> (A) Bayesian coseismic slip reconstruction of the 2019 Ridgecrest earthquake. (B) Line-of-sight coseismic ground displacement obtained from the ALOS-2 spacecraft.</figcaption></span>
-							</article>
+	<span class="image main"><img src="images/juno_jup_shorter.jpg" alt="" /><figcaption>Jupiter's South pole as revealed by Juno (NASA/JPL-Caltech/SwRI/MSSS).</figcaption></span>
 
+	<h4 id="dilute-core"> The tidal imprint of a dilute core hosted in Jupiter </h4>
+	<p align="justify">
+	In the traditional view of gas giant planet interiors, an envelope of H-He fluid covers a compact core of rocky and icy material. This traditional view nicely emerges from the standard model of planet formation via core accretion. However, even to this day, no geophysical evidence exists to validate the traditional view.
+	</p>
+	<p align="justify">
+	The zonal gravitational field (i.e., non-tidal) observed by Juno suggests that Jupiter hosts a dilute core that may extend as far as ~0.6R_J (Militzer et al., 2022). A less extended dilute core could also explain the data when using a different equation of state for the H-He fluid (Miguel et al., 2022). Avoiding the uncertainties related to the equation of state, this work used Jovian dynamical tides and normal modes to show that internal gravity waves trapped in an extended dilute core (~0.7R_J) reconcile the anomaly in Juno's k₄₂ observation (Idini and Stevenson, 2022b). This scenario invokes a resonance between Jupiter's internal gravity waves and the orbital motion of the satellite Io. The resonance mechanism provides independent constraints on Jupiter's interior structure that complement gravity measurements of the static gravitational field, establishing tidal observations as a probe of compositional stratification in planetary interiors.
+	</p>
+	<span class="image main"><img src="images/jup_models.png" alt="" /><figcaption> What kind of core does Jupiter have? (Idini 2022)</figcaption></span>
+
+	<h4 id="earthquake-mechanics"> Theoretical and computational earthquake mechanics </h4>
+	<p align="justify"> 
+	The nucleation, propagation, and arrest of earthquakes remains a fundamental unsolved problem in geophysics, with observational complexity often exceeding what simple models predict. Seismological and geodetic observations reveal highly damaged rock surrounding active fault zones—low-velocity zones with reduced elastic moduli—yet most rupture models treat faults as embedded in homogeneous elastic media.
+	</p>
+	<p align="justify"> 
+	This work extended a spectral boundary integral earthquake simulator (Luo et al., 2017) to incorporate fault zone damage, enabling quasi-dynamic simulations of multi-cycle earthquake sequences in elastically heterogeneous media. The damaged zones alter stress transfer in ways that cannot be captured by homogeneous models: they preferentially promote short-wavelength stress heterogeneity and modify the spatial distribution of slip during rupture. These simulations revealed a quasi-static mechanism for generating earthquake pulses—a common rupture mode in large destructive events where slip at any point on the fault is brief despite extended total rupture duration. The mechanism operates through modified stress transfer kernels in damaged zones, independent of the dynamic wave effects previously thought necessary for pulse generation (Idini and Ampuero, 2020).
+	</p>
+	<p align="justify"> 
+	Subsequent fully-dynamic earthquake cycle simulations confirmed these findings and revealed additional complexity (Flores-Cuba et al., 2024). The quasi-static pulse mechanism persists when seismic wave propagation is rigorously accounted for, though dynamic interactions between rupture fronts and fault zone trapped waves introduce slip rate oscillations at characteristic frequencies. Damage zones amplify high-frequency seismic radiation and produce multiple peaks in source time functions—features often attributed to fault segmentation or frictional heterogeneity, but which emerge here from purely elastic heterogeneity in a geometrically simple fault. These results establish damaged fault zones as a fundamental control on rupture complexity, with observable signatures in both near-field ground motion and far-field seismic radiation.
+	</p>
+
+	<span class="image main"><img src="images/slip.png" alt="" /><figcaption>Spatiotemporal evolution of slip velocity in the characteristic event of an intact homogeneous medium, a low-velocity fault zone, and an intact homogeneous medium with ten times smaller nucleation length.</figcaption></span>
+
+	<h4 id="ground-motion"> Earthquake ground-motion characterization </h4>
+	<p align="justify"> 
+	Seismic hazard assessment in subduction zones requires ground motion prediction equations calibrated to local tectonic and geological conditions, yet existing models often fail to capture regional variations in high-frequency attenuation. Using strong-motion records from the Chilean seismic network, this work developed empirical attenuation relationships that distinguish between interplate and intraplate earthquake sources—a distinction critical for forecasting shaking intensity in a region where both rupture styles produce destructive events. The statistical framework accounts for path effects, site conditions, and source depth, revealing systematic differences in spectral decay that previous models had overlooked.
+	</p> 
+	<p align="justify"> 
+	The resulting ground motion prediction equations (Idini et al., 2017) are now routinely applied in seismic hazard studies throughout Chile, informing building codes and infrastructure design in one of the world's most seismically active regions.
+	</p> 
+	<p align="justify"> 
+	Subsequent analysis of the spectral decay parameter κ revealed an unexpected complexity in the attenuation structure (Idini et al., 2024). Earthquakes located near the subduction trench exhibit κ values that increase ten times faster with distance than earthquakes at depth or downdip along the plate boundary—despite similar path lengths to coastal recording stations. This double distance dependence cannot be explained by variations in seismic velocity alone and instead points to strong lateral heterogeneity in the quality factor Q. The interpretation invokes the eroded and fractured continental wedge near the trench, where seismic energy dissipates far more rapidly than in the intact continental basement traversed by deeper events. This finding has direct implications for seismic hazard: coastal cities above the downdip portion of the megathrust experience ground motions with approximately three times higher spectral amplitude at 8 Hz compared to what current prediction equations anticipate, exposing low-rise structures to underestimated high-frequency shaking.
+	</p> 
+	<span class="image main"><img src="images/chilequake_shorter.jpg" alt="" /><figcaption>Valdivia residents explore a crack caused by the <a href="https://en.wikipedia.org/wiki/1960_Valdivia_earthquake">1960 Chile earthquake</a> (STF/AFP/Getty).</figcaption></span>
+
+	<h4 id="ridgecrest"> Spaceborne reconstruction of earthquake sources </h4>
+	<p align="justify">
+	The 2019 Ridgecrest earthquake sequence ended two decades of seismic quiescence in California with a geometrically complex rupture involving hierarchical orthogonal faulting. I reconstructed the coseismic slip distribution using satellite radar interferometry and GPS observations, implementing a fully probabilistic Bayesian framework with parallel MCMC sampling. The challenge was not merely solving the inverse problem, but doing so in a way that rigorously quantified uncertainties across a high-dimensional fault geometry—something conventional deterministic methods cannot achieve.
+	</p>
+	<p align="justify">
+	The model was completed within two months of data acquisition and published in Science (Ross et al., 2019), becoming the primary reference for characterizing this event. It demonstrated that sophisticated probabilistic inference at scale need not sacrifice operational relevance, a tension that pervades problems where sparse observations must constrain complex physical processes. The work ranks among the top 0.1% of cited geoscience publications from 2019.</p>
+
+	
+	<span class="image main"><img src="images/ridgecrest.jpg" alt="" /><figcaption> (A) Bayesian coseismic slip reconstruction of the 2019 Ridgecrest earthquake. (B) Line-of-sight coseismic ground displacement obtained from the ALOS-2 spacecraft.</figcaption></span>
+</article>
 						<!-- About -->
 							<article id="publications">
 								<h2 class="major">Publications</h2>
