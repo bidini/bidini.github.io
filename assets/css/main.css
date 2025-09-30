@@ -1646,3 +1646,62 @@ input, select, textarea {
 		body.is-preload #footer {
 			opacity: 0;
 		}
+
+    /* Research image styles */
+.research-image {
+    width: 100%;
+    margin: 20px 0;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.research-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.research-image:hover img {
+    transform: scale(1.02);
+}
+
+.research-image figcaption {
+    padding: 10px 15px;
+    background-color: rgba(0, 0, 0, 0.4);
+    font-size: 0.9em;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+/* Research navigation grid */
+#research .nav-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+#research .nav-grid a {
+    padding: 10px;
+    background-color: rgba(255,255,255,0.03);
+    border-radius: 3px;
+    text-decoration: none;
+    border-left: 3px solid rgba(255,255,255,0.3);
+    transition: all 0.3s;
+}
+
+#research .nav-grid a:hover {
+    background-color: rgba(255,255,255,0.08);
+    border-left-color: rgba(255,255,255,0.6);
+}
+
+@media (max-width: 768px) {
+    #research .nav-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .research-image {
+        margin: 15px 0;
+    }
+}
