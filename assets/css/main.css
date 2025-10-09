@@ -1761,3 +1761,53 @@ input, select, textarea {
         gap: 20px;
     }
 }
+
+
+/* Blog-specific styles */
+.blog-list {
+    margin: 40px 0;
+}
+.blog-item {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.blog-item h3 {
+    margin-bottom: 8px;
+}
+.blog-meta {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.9em;
+    margin-bottom: 12px;
+}
+.blog-excerpt {
+    margin-bottom: 15px;
+}
+.blog-content {
+    margin: 30px 0;
+}
+pre {
+    background: rgba(0,0,0,0.3);
+    padding: 15px;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: 20px 0;
+}
+code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+.blog-figure {
+    margin: 30px 0;
+    text-align: center;
+}
+.blog-figure img {
+    max-width: 100%;
+    border-radius: 4px;
+}
+.blog-figure figcaption {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: rgba(255,255,255,0.7);
+    font-style: italic;
+}
