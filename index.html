@@ -11,11 +11,26 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
         <script>hljs.highlightAll();</script>
+        <!-- Math rendering with standard LaTeX fonts -->
+        <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['$$', '$$']],
+          },
+          svg: {
+            fontCache: 'global'
+          },
+          chtml: {
+            matchFontHeight: false
+          }
+        };
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
 	</head>
 	<body class="is-preload">
 
@@ -275,39 +290,49 @@ src="https://www.youtube.com/embed/0_N8eGQ6_7w">
                                 <p>(1) <b>Idini, B.</b>, Rojas, F., Ruiz, S., & Pastén C. (2017). Ground motion prediction equations for the Chilean subduction zone, <a href="https://link.springer.com/article/10.1007/s10518-016-0050-1">Bulletin of Earthquake Engineering.</a></p>
 							</article>
                             
-                            <!-- Blog -->
-                            <article id="blog">
-                                <h2 class="major">Technical Blog</h2>
+<!-- Blog -->
+<article id="blog">
+	<h2 class="major">Technical Blog</h2>
+	
+	<div class="blog-list">
+		<!-- Post 3 -->
+		<div class="blog-item">
+			<img src="images/models.jpg" alt="Titan models" class="blog-thumb">
+			<div class="blog-item-text">
+				<h3><a href="#post-gwaves">Internal gravity waves in stratified oceans</a></h3>
+				<div class="blog-meta">August 2025</div>
+				<p class="blog-excerpt">
+				Computing resonant g-mode frequencies in Titan's subsurface ocean using the Boussinesq approximation and WKB analysis.
+				</p>
+			</div>
+		</div>
+		
+		<!-- Post 2 -->
+		<div class="blog-item">
+			<img src="images/ridgecrest.jpg" alt="Ridgecrest slip model" class="blog-thumb">
+			<div class="blog-item-text">
+				<h3><a href="#post-bayesian">Bayesian inference for earthquake slip inversions</a></h3>
+				<div class="blog-meta">September 2025</div>
+				<p class="blog-excerpt">
+				Implementing parallel tempering MCMC for probabilistic slip distribution reconstruction from geodetic measurements.
+				</p>
+			</div>
+		</div>
+		
+		<!-- Post 1 -->
+		<div class="blog-item">
+			<img src="images/love_spectrum.png" alt="Love number spectrum" class="blog-thumb">
+			<div class="blog-item-text">
+				<h3><a href="#post-love">Computing tidal Love numbers from normal mode spectra</a></h3>
+				<div class="blog-meta">October 2025</div>
+				<p class="blog-excerpt">
+				Numerical integration of linearized oscillation equations for gas giant planets with rotation and stratification.
+				</p>
+			</div>
+		</div>
+	</div>
+</article>
 
-                                <div class="blog-list">
-                                    <!-- Post 3 -->
-                                    <div class="blog-item">
-                                        <h3><a href="#post-gwaves">Internal gravity waves in stratified oceans</a></h3>
-                                        <div class="blog-meta">August 2025</div>
-                                        <p class="blog-excerpt">
-                                        Computing resonant g-mode frequencies in Titan's subsurface ocean using the Boussinesq approximation and WKB analysis.
-                                        </p>
-                                    </div>
-
-                                    <!-- Post 2 -->
-                                    <div class="blog-item">
-                                        <h3><a href="#post-bayesian">Bayesian inference for earthquake slip inversions</a></h3>
-                                        <div class="blog-meta">September 2025</div>
-                                        <p class="blog-excerpt">
-                                        Implementing parallel tempering MCMC for probabilistic slip distribution reconstruction from geodetic measurements.
-                                        </p>
-                                    </div>
-
-                                    <!-- Post 1 -->
-                                    <div class="blog-item">
-                                        <h3><a href="#post-love">Computing tidal Love numbers from normal mode spectra</a></h3>
-                                        <div class="blog-meta">October 2025</div>
-                                        <p class="blog-excerpt">
-                                        Numerical integration of linearized oscillation equations for gas giant planets with rotation and stratification.
-                                        </p>
-                                    </div>
-                                </div>
-                            </article>
 
                             <!-- Individual Blog Posts -->
 <article id="post-love">

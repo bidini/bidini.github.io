@@ -1811,3 +1811,50 @@ code {
     color: rgba(255,255,255,0.7);
     font-style: italic;
 }
+.blog-item {
+	display: flex;
+	gap: 20px;
+	margin-bottom: 40px;
+	padding-bottom: 30px;
+	border-bottom: 1px solid rgba(255,255,255,0.1);
+	align-items: flex-start;
+}
+
+.blog-thumb {
+	width: 120px;
+	height: 120px;
+	object-fit: cover;
+	border-radius: 4px;
+	flex-shrink: 0;
+}
+
+.blog-item-text {
+	flex: 1;
+}
+
+@media (max-width: 768px) {
+	.blog-item {
+		flex-direction: column;
+	}
+	
+	.blog-thumb {
+		width: 100%;
+		height: auto;
+	}
+}
+
+/* Math rendering - prevent style inheritance */
+.MathJax, .MathJax_Display {
+	font-weight: normal !important;
+	font-style: normal !important;
+}
+
+mjx-container {
+	font-weight: normal !important;
+}
+
+mjx-math {
+	font-weight: normal !important;
+}
+
+
