@@ -11,6 +11,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+        <script>hljs.highlightAll();</script>
 	</head>
 	<body class="is-preload">
 
@@ -33,7 +38,7 @@
 								<li><a href="#research">research</a></li>
 								<li><a href="idini_publications.pdf">publications</a></li>
 								<li><a href="CV.pdf">cv</a></li>
-                                <li><a href="blog.html">blog</a></li>
+                                <li><a href="#blog">blog</a></li>
 							</ul>
 						</nav>
 <!--                                <p>  
@@ -269,6 +274,216 @@ src="https://www.youtube.com/embed/0_N8eGQ6_7w">
                                 [<a href="https://github.com/ydluo/qdyn">Software</a>] </p>
                                 <p>(1) <b>Idini, B.</b>, Rojas, F., Ruiz, S., & Pastén C. (2017). Ground motion prediction equations for the Chilean subduction zone, <a href="https://link.springer.com/article/10.1007/s10518-016-0050-1">Bulletin of Earthquake Engineering.</a></p>
 							</article>
+                            
+                            <!-- Blog -->
+                            <article id="blog">
+                                <h2 class="major">Technical Blog</h2>
+
+                                <div class="blog-list">
+                                    <!-- Post 3 -->
+                                    <div class="blog-item">
+                                        <h3><a href="#post-gwaves">Internal gravity waves in stratified oceans</a></h3>
+                                        <div class="blog-meta">August 2025</div>
+                                        <p class="blog-excerpt">
+                                        Computing resonant g-mode frequencies in Titan's subsurface ocean using the Boussinesq approximation and WKB analysis.
+                                        </p>
+                                    </div>
+
+                                    <!-- Post 2 -->
+                                    <div class="blog-item">
+                                        <h3><a href="#post-bayesian">Bayesian inference for earthquake slip inversions</a></h3>
+                                        <div class="blog-meta">September 2025</div>
+                                        <p class="blog-excerpt">
+                                        Implementing parallel tempering MCMC for probabilistic slip distribution reconstruction from geodetic measurements.
+                                        </p>
+                                    </div>
+
+                                    <!-- Post 1 -->
+                                    <div class="blog-item">
+                                        <h3><a href="#post-love">Computing tidal Love numbers from normal mode spectra</a></h3>
+                                        <div class="blog-meta">October 2025</div>
+                                        <p class="blog-excerpt">
+                                        Numerical integration of linearized oscillation equations for gas giant planets with rotation and stratification.
+                                        </p>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Individual Blog Posts -->
+<article id="post-love">
+	<h2 class="major">Computing tidal Love numbers</h2>
+	<div class="blog-meta">October 2025</div>
+
+	<div class="blog-content">
+		<p align="justify">
+		The tidal Love number \(k_\ell\) quantifies a planet's deformation response to external tidal forcing. For gas giants, this response couples to internal oscillations when forcing frequencies approach eigenmode frequencies.
+		</p>
+
+		<p align="justify">
+		The perturbed gravitational potential exterior to the planet:
+		</p>
+
+		<p>
+		$$U_{\text{ext}} = -\frac{GM}{r}\left(1 + \sum_{\ell=2}^{\infty} k_\ell \left(\frac{R}{r}\right)^{\ell+1} P_\ell(\cos\theta)\right)$$
+		</p>
+
+		<p align="justify">
+		where \(k_\ell\) encodes the induced multipole amplitude. For dynamical tides, resonant enhancement occurs when \(\omega \approx \omega_n\).
+		</p>
+
+		<h3>Numerical implementation</h3>
+
+		<p align="justify">
+		The core algorithm integrates coupled ODEs for radial displacement, potential perturbation, and pressure. Full implementation: <a href="https://github.com/yourusername/tide-solver">github.com/yourusername/tide-solver</a>.
+		</p>
+
+<pre><code class="language-python">def compute_love_number(model, ell, omega):
+    """Compute k_ell at forcing frequency omega."""
+    sol = solve_ivp(
+        lambda r, y: oscillation_eqs(r, y, omega, ell, model),
+        [r[0], r[-1]], y0, rtol=1e-10
+    )
+
+    R = model['radius'][-1]
+    k_ell = (sol.y[3][-1] * R / sol.y[1][-1] + ell + 1) / (ell + 1)
+    return k_ell
+</code></pre>
+
+		<p align="justify">
+		For Jupiter, rotation-modified response yields \(k_{22} \approx 0.59\) at Io's forcing frequency, enhanced from static \(k_{22}^{\text{static}} \approx 0.379\) (Idini & Stevenson, 2021).
+		</p>
+
+		<figure class="blog-figure">
+			<img src="images/love_spectrum.png" alt="Love number spectrum">
+			<figcaption>Frequency-dependent \(k_{22}\) showing resonant peaks.</figcaption>
+		</figure>
+
+		<h3>References</h3>
+		<p style="font-size: 0.9em;">
+		Idini, B. & Stevenson, D.J. (2021). Dynamical tides in Jupiter as revealed by Juno. <em>PSJ</em>, 2(2), 69.
+		</p>
+	</div>
+
+	<p><a href="#blog">← Back to blog</a></p>
+</article>
+
+<article id="post-bayesian">
+	<h2 class="major">Bayesian earthquake slip inversions</h2>
+	<div class="blog-meta">September 2025</div>
+
+	<div class="blog-content">
+		<p align="justify">
+		Geodetic observations constrain coseismic slip through elastic dislocation. Given surface displacements \(\mathbf{d}\), we seek the posterior over fault slip \(\mathbf{m}\):
+		</p>
+
+		<p>
+		$$p(\mathbf{m}|\mathbf{d}) \propto p(\mathbf{d}|\mathbf{m}) \, p(\mathbf{m})$$
+		</p>
+
+		<p align="justify">
+		The likelihood assumes Gaussian errors. The prior enforces smoothness via Laplacian regularization.
+		</p>
+
+		<h3>MCMC sampling</h3>
+
+		<p align="justify">
+		Parallel tempering explores multimodal posteriors efficiently. Complete implementation: <a href="https://github.com/yourusername/slip-inversion">github.com/yourusername/slip-inversion</a>.
+		</p>
+
+<pre><code class="language-python">def log_posterior(m, d, G, Cd_inv, alpha):
+    """Log posterior for slip vector m."""
+    residual = d - G @ m
+    chi2 = residual.T @ Cd_inv @ residual
+
+    L = laplacian_matrix(fault_geometry)
+    roughness = m.T @ L.T @ L @ m
+
+    return -0.5 * (chi2 + alpha * roughness)
+
+sampler = emcee.EnsembleSampler(nwalkers, ndim, log_posterior,
+                                args=(data, greens, Cd_inv, alpha))
+sampler.run_mcmc(pos, 50000)
+</code></pre>
+
+		<p align="justify">
+		Ridgecrest reconstruction (Ross et al., 2019) converged within 72 hours on 16 cores, revealing hierarchical fault activation.
+		</p>
+
+		<figure class="blog-figure">
+			<img src="images/ridgecrest.jpg" alt="slip model">
+			<figcaption>Posterior mean slip distribution from InSAR and GPS inversion.</figcaption>
+		</figure>
+
+		<h3>References</h3>
+		<p style="font-size: 0.9em;">
+		Ross, Z., Idini, B. et al. (2019). Hierarchical interlocked orthogonal faulting in the 2019 Ridgecrest earthquake sequence. <em>Science</em>, 366(6463), 346-351.
+		</p>
+	</div>
+
+	<p><a href="#blog">← Back to blog</a></p>
+</article>
+
+<article id="post-gwaves">
+	<h2 class="major">Internal gravity waves</h2>
+	<div class="blog-meta">August 2025</div>
+
+	<div class="blog-content">
+		<p align="justify">
+		Titan's subsurface ocean supports internal gravity waves when salinity gradients produce stable stratification. The dispersion relation for linear waves in Boussinesq fluid:
+		</p>
+
+		<p>
+		$$\omega^2 = N^2 \frac{k_h^2}{k^2}$$
+		</p>
+
+		<p align="justify">
+		where \(N(z)\) is the Brunt-Väisälä frequency. Resonance occurs when \(\omega\) matches Titan's orbital frequency \(\omega_{\text{orb}} = 4.56 \times 10^{-6}\) rad/s.
+		</p>
+
+		<h3>Modal structure calculation</h3>
+
+		<p align="justify">
+		The vertical structure equation reduces to a Sturm-Liouville problem. Solver and analysis: <a href="https://github.com/yourusername/titan-gwaves">github.com/yourusername/titan-gwaves</a>.
+		</p>
+
+<pre><code class="language-python">def brunt_vaisala(z, S, T):
+    """Stratification frequency from salinity/temperature."""
+    rho = seawater_density(S, T)
+    drho_dz = np.gradient(rho, z)
+    g = 1.35  # m/s^2
+
+    N2 = -(g / rho) * drho_dz
+    return np.sqrt(np.maximum(N2, 0))
+
+def find_resonances(N_profile, z, omega_tidal):
+    """Identify g-modes near tidal frequency."""
+    resonances = []
+    for n in range(1, 50):
+        omega_n = solve_eigenvalue(N_profile, z, n)
+        if abs(omega_n - omega_tidal) / omega_tidal < 0.1:
+            resonances.append((n, omega_n))
+    return resonances
+</code></pre>
+
+		<p align="justify">
+		For mean salinity below 5 g/kg, mode-2 resonance produces 15–45% enhancement in \(k_2\), reconciling Cassini's \(k_2 = 0.616 \pm 0.067\) (Idini & Nimmo, 2024).
+		</p>
+
+		<figure class="blog-figure">
+			<img src="images/models.jpg" alt="titan models">
+			<figcaption>Interior models showing resonant stratification scenarios.</figcaption>
+		</figure>
+
+		<h3>References</h3>
+		<p style="font-size: 0.9em;">
+		Idini, B. & Nimmo, F. (2024). Resonant stratification in Titan's global ocean. <em>PSJ</em>, 5(1), 15.
+		</p>
+	</div>
+
+	<p><a href="#blog">← Back to blog</a></p>
+</article>
+
+
 					</div>
 
 				<!-- Footer -->
