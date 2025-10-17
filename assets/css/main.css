@@ -770,9 +770,6 @@ input, select, textarea {
 		dl dd {
 			margin-left: 2rem;
 		}
-    li {
-        width: 220px;
-    }
 /* Actions */
 
 	ul.actions {
@@ -1780,6 +1777,11 @@ input, select, textarea {
     font-size: 0.9em;
     margin-bottom: 12px;
 }
+.blog-credit {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.5em;
+    margin-bottom: 0px;
+}
 .blog-excerpt {
     margin-bottom: 15px;
 }
@@ -1841,6 +1843,142 @@ code {
 		width: 100%;
 		height: auto;
 	}
+}
+
+#post-ai-welfare .blog-content ul,
+#post-ai-welfare .blog-content ol {
+    margin: 15px 0;
+    padding-left: 30px;
+}
+
+#post-ai-welfare .blog-content li {
+    margin: 8px 0;
+}
+
+#post-ai-welfare hr {
+    margin: 30px 0;
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Key findings box for blog posts */
+.key-findings {
+    background-color: rgba(255,255,255,0.05);
+    padding: 20px;
+    margin: 20px 0;
+    border-left: 3px solid rgba(255,255,255,0.3);
+}
+
+.key-findings ul {
+    margin-top: 10px;
+}
+
+/* Lighter blockquote style for nested quotes in blog posts */
+blockquote.light {
+    border-left: 3px solid rgba(255,255,255,0.2);
+    padding-left: 15px;
+    margin: 15px 0;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* Table caption/note styling */
+.table-note {
+    font-size: 0.9em;
+    font-style: italic;
+    margin-top: 10px;
+    opacity: 0.8;
+}
+
+/* Footnotes section */
+.footnotes {
+    font-size: 0.9em;
+    line-height: 1.6;
+    margin-top: 30px;
+}
+
+.footnotes p {
+    margin-bottom: 1rem;
+}
+
+/* Constrain blog post title width */
+#main article h2.major {
+    max-width: 100%;
+    width: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Ensure blog list items use full available width */
+.blog-content ul li,
+.blog-content ol li,
+.key-findings ul li {
+    width: auto;
+}
+
+/* Tighter paragraph spacing for blog posts */
+.blog-content p {
+    margin: 0 0 0.5rem 0;
+}
+
+/* Styled names for Claude instances */
+.claude-blue {
+    color: #6B9BD1;  /* Nice blue that works on dark background */
+    font-weight: 600;
+}
+
+.claude-red {
+    color: #E67E7E;  /* Nice red that works on dark background */
+    font-weight: 600;
+}
+
+/* Proper header spacing in blog posts */
+.blog-content h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.blog-content h4 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Normal letter spacing for blog headers */
+.blog-content h2,
+.blog-content h3,
+.blog-content h4 {
+    letter-spacing: 0.1rem;    /* Tighter spacing */
+    text-transform: uppercase; /* Keep all-caps */
+}
+
+.blog-content {
+    font-weight: 400;
+    font-size: 1.rem;
+    line-height: 1.75;
+}
+
+/* All blog post articles get narrower width */
+#main article[id^="post-"] {
+    width: 45rem;
+    max-width: 100%;
+}
+
+/* Keep code blocks readable but allow some extra width */
+#main article .blog-content pre {
+    max-width: 100%;
+    overflow-x: auto;    /* Scroll if code is too wide */
+}
+
+@media screen and (max-width: 736px) {
+    .blog-content {
+        font-size: 1.15rem;
+    }
+}
+
+/* First header after blog-content div shouldn't have extra top margin */
+.blog-content > h3:first-child,
+.blog-content > h4:first-child {
+    margin-top: 0;
 }
 
 /* Math rendering - prevent style inheritance */
