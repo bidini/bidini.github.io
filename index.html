@@ -640,7 +640,6 @@ footer{
     <div id="arxiv-list">
       <div class="arxiv-empty">Loading papers...</div>
     </div>
-    <a href="arxiv-inbox/public_inbox.html" class="view-all-btn" id="arxiv-view-all" style="display:none">View all papers →</a>
   </div>
 </section>
 
@@ -681,7 +680,7 @@ document.querySelectorAll('.nav-links a').forEach(a => {
     const data = await res.json();
     const papers = (data.papers || [])
       .sort((a, b) => (b.is_saved - a.is_saved) || (b.relevance_score - a.relevance_score))
-      .slice(0, 10);
+      .slice(0, 20);
 
     if (papers.length === 0) {
       list.innerHTML = '<div class="arxiv-empty">No recent papers.</div>';
