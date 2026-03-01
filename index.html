@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CV — Benjamin Idini</title>
+<title>Benjamin Idini — Planetary Scientist</title>
+<meta name="description" content="Benjamin Idini — Postdoctoral Researcher in Planetary Science at UC Santa Cruz. Research in giant planet interiors, tidal dynamics, ocean worlds, and earthquake mechanics.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -19,257 +20,691 @@
   --text-bright: #eeeef4;
   --accent: #6c8cff;
   --accent-dim: #4a5f99;
+  --accent-glow: rgba(108,140,255,0.08);
   --heading: #f0f0f8;
+  --score-high: #5cb85c;
+  --score-mid: #c4a94c;
+  --score-low: #888;
+
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Source Sans 3', -apple-system, sans-serif;
 }
+
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+
 body{
-  font-family:var(--font-body);background:var(--bg);color:var(--text);
-  line-height:1.7;font-size:16px;font-weight:300;-webkit-font-smoothing:antialiased;
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+  font-size:16px;
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
 }
+
 a{color:var(--accent);text-decoration:none;transition:color .2s}
 a:hover{color:#9db4ff}
 
-/* ── NAV ──────────────────────────────── */
+img{max-width:100%;display:block}
+
+/* ── NAV ──────────────────────────────────── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(14,16,23,0.85);backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);
+  background:rgba(14,16,23,0.85);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
 }
 .nav-inner{
-  max-width:1080px;margin:0 auto;display:flex;align-items:center;
-  justify-content:space-between;padding:0 28px;height:56px;
+  max-width:1080px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 28px;height:56px;
 }
-.nav-name{font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--heading);letter-spacing:0.5px}
+.nav-name{
+  font-family:var(--font-display);
+  font-size:18px;font-weight:600;
+  color:var(--heading);letter-spacing:0.5px;
+}
 .nav-links{display:flex;gap:28px}
-.nav-links a{font-size:13px;font-weight:400;letter-spacing:0.4px;text-transform:uppercase;color:var(--text-dim);transition:color .2s}
-.nav-links a:hover{color:var(--text-bright)}
-.nav-links a.active{color:var(--text-bright)}
+.nav-links a{
+  font-size:13px;font-weight:400;letter-spacing:0.4px;
+  text-transform:uppercase;color:var(--text-dim);
+  transition:color .2s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--text-bright)}
+
+/* Mobile nav */
 .nav-toggle{display:none;background:none;border:none;color:var(--text-dim);font-size:22px;cursor:pointer}
+
 @media(max-width:720px){
-  .nav-links{display:none;flex-direction:column;position:absolute;top:56px;left:0;right:0;background:rgba(14,16,23,0.97);border-bottom:1px solid var(--border);padding:16px 28px;gap:16px}
+  .nav-links{
+    display:none;flex-direction:column;
+    position:absolute;top:56px;left:0;right:0;
+    background:rgba(14,16,23,0.97);
+    border-bottom:1px solid var(--border);
+    padding:16px 28px;gap:16px;
+  }
   .nav-links.open{display:flex}
   .nav-toggle{display:block}
 }
 
-/* ── CV LAYOUT ────────────────────────── */
-.cv{max-width:720px;margin:0 auto;padding:100px 28px 80px}
-
-.cv-header{margin-bottom:48px}
-.cv-header h1{
-  font-family:var(--font-display);font-size:clamp(28px,5vw,40px);
-  font-weight:400;color:var(--heading);line-height:1.3;margin-bottom:8px;
+/* ── HERO ─────────────────────────────────── */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:100px 28px 80px;
+  position:relative;
+  overflow:hidden;
 }
-.cv-header .subtitle{font-size:16px;color:var(--text-dim);margin-bottom:16px}
-.cv-download{
-  display:inline-block;font-size:13px;letter-spacing:0.4px;
-  text-transform:uppercase;color:var(--accent-dim);
-  border:1px solid var(--border);padding:6px 16px;border-radius:4px;
+
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 40%, rgba(108,140,255,0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 80% 60%, rgba(90,60,180,0.03) 0%, transparent 70%);
+  pointer-events:none;
+}
+
+.hero-content{
+  max-width:720px;text-align:center;
+  position:relative;z-index:1;
+  animation:fadeUp 1s ease both;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.hero-portrait{
+  width:180px;height:180px;
+  border-radius:50%;
+  object-fit:cover;
+  margin:0 auto 32px;
+  border:2px solid var(--border);
+  opacity:0;animation:fadeUp .8s ease .2s both;
+}
+
+.hero h1{
+  font-family:var(--font-display);
+  font-size:clamp(36px,6vw,56px);
+  font-weight:400;
+  color:var(--heading);
+  letter-spacing:2px;
+  margin-bottom:12px;
+}
+
+.hero .subtitle{
+  font-size:17px;font-weight:300;
+  color:var(--text-dim);
+  margin-bottom:28px;
+  letter-spacing:0.3px;
+}
+
+.hero-links{
+  display:flex;gap:20px;justify-content:center;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .8s ease .5s both;
+}
+.hero-links a{
+  font-size:13px;letter-spacing:0.3px;
+  color:var(--text-dim);
+  padding:6px 16px;
+  border:1px solid var(--border);
+  border-radius:4px;
   transition:all .2s;
 }
-.cv-download:hover{color:var(--accent);border-color:var(--accent-dim);background:rgba(108,140,255,0.06)}
+.hero-links a:hover{
+  color:var(--accent);border-color:var(--accent-dim);
+  background:var(--accent-glow);
+}
 
-/* ── SECTIONS ─────────────────────────── */
-.cv-section{margin-bottom:48px}
-.cv-section-label{
+.scroll-hint{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  color:var(--text-dim);font-size:12px;letter-spacing:1px;
+  text-transform:uppercase;
+  opacity:0;animation:fadeUp 1s ease 1.2s both;
+}
+.scroll-hint::after{
+  content:'';display:block;width:1px;height:32px;
+  background:var(--border);margin:8px auto 0;
+}
+
+/* ── SECTIONS ─────────────────────────────── */
+section{padding:100px 28px}
+section:nth-child(even){background:var(--bg2)}
+
+.section-inner{max-width:760px;margin:0 auto}
+
+.section-label{
   font-size:11px;font-weight:600;letter-spacing:3px;
   text-transform:uppercase;color:var(--accent);
-  margin-bottom:16px;padding-bottom:8px;
+  margin-bottom:12px;
+}
+
+section h2{
+  font-family:var(--font-display);
+  font-size:clamp(28px,4vw,38px);
+  font-weight:400;
+  color:var(--heading);
+  margin-bottom:40px;
+  line-height:1.3;
+}
+
+section p{margin-bottom:20px;color:var(--text)}
+
+section p:last-child{margin-bottom:0}
+
+/* ── ABOUT ────────────────────────────────── */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:40px;
+}
+
+.about-images{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+  margin-top:20px;
+}
+.about-images img{
+  border-radius:4px;aspect-ratio:4/3;object-fit:cover;
+  border:1px solid var(--border);
+}
+
+/* ── RESEARCH ─────────────────────────────── */
+.research-topic{
+  margin-bottom:72px;
+  padding-bottom:72px;
   border-bottom:1px solid var(--border);
 }
+.research-topic:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
 
-/* ── ENTRIES ──────────────────────────── */
-.cv-entry{
-  display:grid;
-  grid-template-columns:120px 1fr;
-  gap:8px 20px;
-  margin-bottom:20px;
+.research-topic h3{
+  font-family:var(--font-display);
+  font-size:24px;font-weight:600;
+  color:var(--heading);
+  margin-bottom:24px;
+  line-height:1.35;
 }
-.cv-date{
+
+.research-topic img{
+  border-radius:4px;
+  border:1px solid var(--border);
+  margin:24px 0;
+}
+
+.research-topic .caption{
   font-size:14px;color:var(--text-dim);
-  font-variant-numeric:tabular-nums;
-  padding-top:2px;
+  font-style:italic;
+  margin-top:-16px;margin-bottom:24px;
 }
-.cv-body{}
-.cv-role{font-weight:600;color:var(--text-bright);font-size:15px}
-.cv-org{color:var(--text);font-size:15px}
-.cv-detail{font-size:14px;color:var(--text-dim);margin-top:2px}
 
-/* ── PUB LIST ─────────────────────────── */
-.cv-pub{margin-bottom:12px;font-size:14px;line-height:1.6}
-.cv-pub strong{color:var(--text-bright);font-weight:600}
+.references{
+  margin-top:24px;
+  padding-top:16px;
+  border-top:1px solid var(--border);
+}
+.references p{
+  font-size:14px;color:var(--text-dim);
+  margin-bottom:8px;line-height:1.6;
+}
 
-/* ── SKILLS / LISTS ───────────────────── */
-.cv-list{font-size:14px;color:var(--text);line-height:1.8}
+/* ── PUBLICATIONS ─────────────────────────── */
+.pub-list{list-style:none}
+.pub-item{
+  padding:16px 0;
+  border-bottom:1px solid var(--border);
+  font-size:15px;line-height:1.6;
+}
+.pub-item:first-child{border-top:1px solid var(--border)}
+.pub-num{
+  color:var(--text-dim);font-size:13px;
+  font-variant-numeric:tabular-nums;
+  margin-right:6px;
+}
+.pub-item strong{color:var(--text-bright);font-weight:600}
+.pub-links{margin-top:4px}
+.pub-links a{
+  font-size:12px;
+  color:var(--accent-dim);
+  margin-right:12px;
+  letter-spacing:0.3px;
+}
+.pub-links a:hover{color:var(--accent)}
 
+/* ── BLOG ─────────────────────────────────── */
+.blog-entry{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:6px;
+  overflow:hidden;
+  margin-bottom:12px;
+  transition:background .15s;
+}
+.blog-entry:hover{background:var(--surface2)}
+
+.blog-row{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:start;
+  gap:16px;
+  padding:18px 24px;
+  cursor:pointer;
+}
+
+.blog-title{
+  font-family:var(--font-display);
+  font-size:19px;font-weight:600;
+  color:var(--heading);line-height:1.35;
+}
+.blog-row-meta{
+  font-size:13px;color:var(--text-dim);margin-top:4px;
+}
+.blog-row-date{
+  font-size:13px;color:var(--text-dim);
+  white-space:nowrap;padding-top:4px;
+}
+
+.blog-expanded{
+  display:none;
+  padding:0 24px 24px;
+}
+.blog-entry.open .blog-expanded{display:block}
+
+.blog-expanded p{font-size:15px;margin-bottom:14px}
+
+.blog-findings{margin:16px 0;padding-left:0;list-style:none}
+.blog-findings li{
+  font-size:14px;color:var(--text);
+  padding:8px 0 8px 16px;
+  border-left:2px solid var(--accent-dim);
+  margin-bottom:8px;
+}
+
+.blog-read-more{
+  font-size:13px;letter-spacing:0.4px;
+  text-transform:uppercase;
+}
+
+/* ── ARXIV PREVIEW ────────────────────────── */
+.arxiv-preview-row{
+  display:grid;
+  grid-template-columns:24px 48px 1fr auto;
+  align-items:start;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+  cursor:pointer;
+  transition:background .1s;
+}
+.arxiv-preview-row:first-child{border-top:1px solid var(--border)}
+.arxiv-preview-row:hover{background:var(--surface)}
+
+.ap-star{font-size:15px;color:#e8a838;padding-top:1px}
+.ap-score{
+  font-size:14px;font-weight:600;
+  font-variant-numeric:tabular-nums;
+  text-align:right;padding-top:1px;
+}
+.ap-score.high{color:var(--score-high)}
+.ap-score.mid{color:var(--score-mid)}
+.ap-score.low{color:var(--score-low)}
+
+.ap-title{font-size:14px;color:var(--text);line-height:1.4}
+.ap-authors{font-size:12px;color:var(--text-dim);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.ap-content{min-width:0}
+.ap-date{font-size:12px;color:var(--text-dim);white-space:nowrap;padding-top:2px}
+
+.ap-abstract{
+  display:none;font-size:13px;color:var(--text-dim);
+  margin-top:10px;line-height:1.6;grid-column:3;
+}
+.arxiv-preview-row.expanded .ap-abstract{display:block}
+
+.ap-links{
+  display:none;margin-top:8px;gap:12px;grid-column:3;
+}
+.arxiv-preview-row.expanded .ap-links{display:flex}
+.ap-links a{font-size:12px}
+
+.arxiv-empty{font-size:14px;color:var(--text-dim);padding:20px 0}
+
+/* ── FOOTER ───────────────────────────────── */
+footer{
+  text-align:center;
+  padding:24px 28px;
+  font-size:12px;color:var(--text-dim);
+  border-top:1px solid var(--border);
+}
+
+/* ── RESPONSIVE ───────────────────────────── */
 @media(max-width:600px){
-  .cv{padding:80px 20px 60px}
-  .cv-entry{grid-template-columns:1fr;gap:2px}
-  .cv-date{font-size:13px}
+  section{padding:64px 20px}
+  .about-images{grid-template-columns:1fr}
+  .hero-portrait{width:140px;height:140px}
+  .arxiv-preview-row{grid-template-columns:20px 40px 1fr}
+  .ap-date{display:none}
+  .blog-row{grid-template-columns:1fr}
+  .blog-row-date{display:none}
 }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="../" class="nav-name">B. Idini</a>
+    <a href="#" class="nav-name">B. Idini</a>
     <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
     <div class="nav-links">
-      <a href="../#about">About</a>
-      <a href="../#research">Research</a>
-      <a href="../#publications">Publications</a>
-      <a href="../#blog">Blog</a>
-      <a href="../#arxiv">Arxiv</a>
-      <a href="./" class="active">CV</a>
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#blog">Blog</a>
+      <a href="#arxiv">Arxiv</a>
+      <a href="cv/">CV</a>
     </div>
   </div>
 </nav>
 
-<div class="cv">
-
-  <div class="cv-header">
-    <h1>Curriculum Vitae</h1>
-    <p class="subtitle">Benjamin Idini · Postdoctoral Researcher, UC Santa Cruz</p>
-    <a href="../CV.pdf" class="cv-download">Download PDF ↓</a>
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-content">
+    <img src="images/Idini_1mb_2.jpg" alt="Benjamin Idini" class="hero-portrait">
+    <h1>Benjamin Idini</h1>
+    <p class="subtitle">Postdoctoral Researcher in Planetary Science — UC Santa Cruz</p>
+    <div class="hero-links">
+      <a href="https://scholar.google.cl/citations?user=DKHyU5UAAAAJ&hl=es">Google Scholar</a>
+      <a href="https://orcid.org/0000-0002-2697-3893">ORCID</a>
+      <a href="https://ui.adsabs.harvard.edu/search/p_=0&q=author%3A(%22Idini%2C%20Benjamin%22)&sort=date%20desc%2C%20bibcode%20desc">ADS</a>
+      <a href="mailto:bidini@ucsc.edu">bidini@ucsc.edu</a>
+    </div>
   </div>
+  <div class="scroll-hint">scroll</div>
+</section>
 
-  <!-- APPOINTMENTS -->
-  <div class="cv-section">
-    <div class="cv-section-label">Appointments</div>
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">About</div>
+    <h2>Welcome</h2>
+    <div class="about-grid">
+      <div>
+        <p>I am a Planetary Scientist currently appointed as a Vera Rubin Postdoctoral Fellow in the Astronomy and Astrophysics Department at UC Santa Cruz. I colead the Interiors Working Group of the Juno mission and I am a science team member of the Europa Clipper. My research interests span over the multi-scale physics of planetary bodies across the Solar System and beyond, most recently earthquakes on Earth, the ocean dynamics of icy satellites, and the dynamic interiors and formation of giant planets. Most of my work involves building models to translate spacecraft measurements into scientific literature. I dream with a future where more and more people feel connected to the beauty of outer space and to each other.</p>
+        <p>I developed my first connection to space as a kid by looking at the clear nightskies of Chiloé Island and the Chilean Patagonia. I initiated my academic path in engineering at the University of Chile, and turned into science trying to understand the large M8.8 Chile earthquake that struck my country of origin in 2010. I received my doctorate degree in Planetary Science from Caltech in 2022, the institution that opened my path into space exploration. Beyond research, I am a science communicator in both English and my native Spanish.</p>
+        <div class="about-images">
+          <img src="images/curanto.jpg" alt="Chiloé Island">
+          <img src="images/palafitos.jpeg" alt="Palafitos">
+          <img src="images/aldachildo_leslicilla.jpg" alt="Aldachildo">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <div class="cv-entry">
-      <div class="cv-date">2022 – present</div>
-      <div class="cv-body">
-        <div class="cv-role">Vera Rubin Postdoctoral Fellow</div>
-        <div class="cv-org">Department of Astronomy &amp; Astrophysics, UC Santa Cruz</div>
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-inner">
+    <div class="section-label">Research</div>
+    <h2>Research Topics</h2>
+
+    <!-- Titan -->
+    <div class="research-topic">
+      <h3>Resonant Stratification in Titan's Global Ocean</h3>
+      <p>The Cassini mission's measurement of Titan's tidal Love number k₂ = 0.616 ± 0.067 (Durante et al., 2019) presented a puzzle: the observed value sits three standard deviations above predictions for a pure water ocean overlain by an elastic ice shell. While a highly viscous ocean floor or elevated bulk ocean density could potentially explain the discrepancy, these scenarios require extreme conditions—either unrealistically low ice viscosity or salt concentrations exceeding those of Earth's oceans.</p>
+      <p>This work developed an alternative interpretation invoking resonant excitation of internal gravity waves in a stably stratified ocean (Idini and Nimmo, 2024). When Titan's ocean contains vertical salinity gradients—with denser, saltier water at depth—it supports internal gravity waves (g-modes) that can be resonantly driven by eccentricity tides if their natural frequencies align with Titan's orbital period. The analysis shows that even modest stratification (mean salinity below 5 g/kg, comparable to Earth's oceans) can produce k₂ enhancements of 15–45%, sufficient to reconcile the Cassini observation without requiring extreme ocean properties. The resonance manifests as tens of meters of additional surface displacement riding atop the equilibrium tide, while deep in the ocean interior, horizontal fluid velocities reach several meters per second—large enough to be dynamically significant yet below the threshold for nonlinear wave breaking.</p>
+      <img src="images/models.jpg" alt="Titan interior models">
+      <p>The mechanism requires explaining how Titan established and maintains such a resonance. Two pathways emerge: secular cooling causes progressive ocean freezing, increasing the Brunt-Väisälä frequency until a g-mode crosses the tidal frequency; alternatively, outward orbital migration continuously sweeps Titan through potential resonances as the tidal forcing frequency drifts. In the freezing scenario, the resonance can become self-sustaining—tidal heating in the resonant ocean produces approximately 6 × 10¹¹ W, comparable to Titan's radiogenic heating, slowing further freezing and locking the system near the resonance. This framework extends beyond Titan: upcoming measurements of Europa's k₂ by Europa Clipper and Ganymede's multi-frequency tidal response by JUICE will test whether resonant stratification operates widely among ocean worlds, and whether tidal observations can probe the otherwise inaccessible density structure of subsurface oceans.</p>
+      <div class="references">
+        <p>Durante, D. et al. (2019). Titan's gravity field and interior structure after Cassini. <em>Icarus</em>, 326, 123-132.</p>
+        <p>Idini, B. &amp; Nimmo, F. (2024). Resonant stratification in Titan's global ocean. <em>The Planetary Science Journal</em>, 5(1), 15. <a href="https://iopscience.iop.org/article/10.3847/PSJ/ad11ef">[Link]</a></p>
       </div>
     </div>
 
-    <!-- TODO: Add earlier appointments from CV.pdf -->
-
-  </div>
-
-  <!-- EDUCATION -->
-  <div class="cv-section">
-    <div class="cv-section-label">Education</div>
-
-    <div class="cv-entry">
-      <div class="cv-date">2017 – 2022</div>
-      <div class="cv-body">
-        <div class="cv-role">Ph.D. in Planetary Science</div>
-        <div class="cv-org">California Institute of Technology</div>
-        <!-- TODO: Advisor, thesis title -->
+    <!-- Tidal theory -->
+    <div class="research-topic">
+      <h3>Tidal Theory of the Gas Giant Planets</h3>
+      <p>Since 2016, the Juno spacecraft has been orbiting Jupiter and collecting a unique data set of Jupiter's tidal Love numbers, namely the tidal response of Jupiter to the masses of the Galilean satellites in orbit around Jupiter. In a pioneering work, this work further developed the theory of dynamical tides applied to gas giant planets (Idini and Stevenson, 2021), a body of knowledge that had not been touched since 1984 (Vorontsov et al., 1984). In this theoretical rebirth of Jovian dynamical tides, the analysis showed that the tidal Love number k₂ measured by Juno was compatible with a modification on the tidal flow produced by the Coriolis force in a rapidly rotating gas giant planet (Idini and Stevenson, 2021). Paired with the Juno observation, these theoretical results constitute the first detection of dynamical tides in a gas giant planet.</p>
+      <img src="images/juno_jup_shorter.jpg" alt="Jupiter's South Pole">
+      <p>Additional Love numbers were reported by Juno after the arrival of the k₂ retrievals. The high-degree tides represented in k₄₂ are not only harder to observe, but are also harder to interpret. First-order perturbation theory was applied to develop a fully analytical theory to illuminate the interpretation of k₄₂ (Idini and Stevenson, 2022a). This theory shows how the oblate figure of Jupiter resulting from rapid rotation couples the tides to the rotational response, resulting in an order of magnitude enhancement in k₄₂ (Wahl et al., 2020, Idini and Stevenson, 2022a). The resulting k₄₂ enhancement gives rise to an anomaly after comparing models with the Juno k₄₂ observation.</p>
+      <div class="references">
+        <p>Vorontsov, S. et al. (1984). Dynamical tidal response of Jupiter and Saturn. <em>Astronomicheskii Vestnik</em>, 18, 8.</p>
+        <p>Idini, B. &amp; Stevenson, D.J. (2021). Dynamical tides in Jupiter as revealed by Juno. <em>The Planetary Science Journal</em>, 2(2), 69. <a href="https://iopscience.iop.org/article/10.3847/PSJ/abe715">[Link]</a></p>
+        <p>Idini, B. &amp; Stevenson, D.J. (2022a). The lost meaning of Jupiter's high-degree Love numbers. <em>The Planetary Science Journal</em>, 3(1), 11. <a href="https://iopscience.iop.org/article/10.3847/PSJ/ac4248">[Link]</a></p>
       </div>
     </div>
 
-    <div class="cv-entry">
-      <div class="cv-date"><!-- TODO --></div>
-      <div class="cv-body">
-        <div class="cv-role"><!-- TODO: degree title --></div>
-        <div class="cv-org">University of Chile</div>
-        <!-- TODO: details -->
+    <!-- Dilute core -->
+    <div class="research-topic">
+      <h3>The Tidal Imprint of Jupiter's Dilute Core</h3>
+      <p>In the traditional view of gas giant planet interiors, an envelope of H-He fluid covers a compact core of rocky and icy material. This traditional view nicely emerges from the standard model of planet formation via core accretion. However, even to this day, no geophysical evidence exists to validate the traditional view.</p>
+      <p>The zonal gravitational field observed by Juno suggests that Jupiter hosts a dilute core that may extend as far as ~0.6R&#x2C7; (Militzer et al., 2022). A less extended dilute core could also explain the data when using a different equation of state for the H-He fluid (Miguel et al., 2022). Avoiding the uncertainties related to the equation of state, this work used Jovian dynamical tides and normal modes to show that internal gravity waves trapped in an extended dilute core (~0.7R&#x2C7;) reconcile the anomaly in Juno's k₄₂ observation (Idini and Stevenson, 2022b). This scenario invokes a resonance between Jupiter's internal gravity waves and the orbital motion of the satellite Io. The resonance mechanism provides independent constraints on Jupiter's interior structure that complement gravity measurements of the static gravitational field, establishing tidal observations as a probe of compositional stratification in planetary interiors.</p>
+      <img src="images/jup_models.png" alt="Jupiter interior models">
+      <div class="references">
+        <p>Militzer, B. et al. (2022). Juno spacecraft measurements of Jupiter's gravity imply a dilute core. <em>The Planetary Science Journal</em>, 3, 185.</p>
+        <p>Miguel, Y. et al. (2022). Jupiter's inhomogeneous envelope. <em>Astronomy &amp; Astrophysics</em>, 662, A18.</p>
+        <p>Idini, B. &amp; Stevenson, D.J. (2022b). The gravitational imprint of an interior-orbital resonance in Jupiter-Io. <em>The Planetary Science Journal</em>, 3(4), 89. <a href="https://iopscience.iop.org/article/10.3847/PSJ/ac6179">[Link]</a></p>
+      </div>
+    </div>
+
+    <!-- Earthquake mechanics -->
+    <div class="research-topic">
+      <h3>Theoretical and Computational Earthquake Mechanics</h3>
+      <p>The nucleation, propagation, and arrest of earthquakes remains a fundamental unsolved problem in geophysics, with observational complexity often exceeding what simple models predict. Seismological and geodetic observations reveal highly damaged rock surrounding active fault zones—low-velocity zones with reduced elastic moduli—yet most rupture models treat faults as embedded in homogeneous elastic media.</p>
+      <p>This work extended a spectral boundary integral earthquake simulator (Luo et al., 2017) to incorporate fault zone damage, enabling quasi-dynamic simulations of multi-cycle earthquake sequences in elastically heterogeneous media. The damaged zones alter stress transfer in ways that cannot be captured by homogeneous models: they preferentially promote short-wavelength stress heterogeneity and modify the spatial distribution of slip during rupture. These simulations revealed a quasi-static mechanism for generating earthquake pulses—a common rupture mode in large destructive events where slip at any point on the fault is brief despite extended total rupture duration. The mechanism operates through modified stress transfer kernels in damaged zones, independent of the dynamic wave effects previously thought necessary for pulse generation (Idini and Ampuero, 2020).</p>
+      <img src="images/slip.png" alt="Slip models">
+      <p>Subsequent fully-dynamic earthquake cycle simulations confirmed these findings and revealed additional complexity (Flores-Cuba et al., 2024). The quasi-static pulse mechanism persists when seismic wave propagation is rigorously accounted for, though dynamic interactions between rupture fronts and fault zone trapped waves introduce slip rate oscillations at characteristic frequencies. Damage zones amplify high-frequency seismic radiation and produce multiple peaks in source time functions—features often attributed to fault segmentation or frictional heterogeneity, but which emerge here from purely elastic heterogeneity in a geometrically simple fault. These results establish damaged fault zones as a fundamental control on rupture complexity, with observable signatures in both near-field ground motion and far-field seismic radiation.</p>
+      <div class="references">
+        <p>Luo, Y. et al. (2017). QDYN: A Quasi-DYNamic earthquake simulator (v1.1). <em>Zenodo</em>. <a href="https://github.com/ydluo/qdyn">[Software]</a></p>
+        <p>Idini, B. &amp; Ampuero, J.-P. (2020). Fault-zone damage promotes pulse-like rupture and back-propagating fronts via quasi-static effects. <em>Geophysical Research Letters</em>, 47(23). <a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2020GL090736">[Link]</a></p>
+        <p>Flores-Cuba, J. et al. (2024). Mechanisms and seismological signatures of rupture complexity induced by fault damage zones. <em>Geophysical Research Letters</em>, 51(11). <a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2024GL108792">[Link]</a></p>
+      </div>
+    </div>
+
+    <!-- Ground motion -->
+    <div class="research-topic">
+      <h3>Earthquake Ground-Motion Characterization</h3>
+      <p>Seismic hazard assessment in subduction zones requires ground motion prediction equations calibrated to local tectonic and geological conditions, yet existing models often fail to capture regional variations in high-frequency attenuation. Using strong-motion records from the Chilean seismic network, this work developed empirical attenuation relationships that distinguish between interplate and intraplate earthquake sources—a distinction critical for forecasting shaking intensity in a region where both rupture styles produce destructive events.</p>
+      <p>The resulting ground motion prediction equations (Idini et al., 2017) are now routinely applied in seismic hazard studies throughout Chile, informing building codes and infrastructure design in one of the world's most seismically active regions.</p>
+      <img src="images/chilequake_shorter.jpg" alt="Chilean earthquake study">
+      <p>Subsequent analysis of the spectral decay parameter κ revealed an unexpected complexity in the attenuation structure (Idini et al., 2024). Earthquakes located near the subduction trench exhibit κ values that increase ten times faster with distance than earthquakes at depth—despite similar path lengths to coastal recording stations. This double distance dependence points to strong lateral heterogeneity in the quality factor Q, invoked by the eroded and fractured continental wedge near the trench. Coastal cities above the downdip portion of the megathrust experience ground motions with approximately three times higher spectral amplitude at 8 Hz compared to what current prediction equations anticipate, exposing low-rise structures to underestimated high-frequency shaking.</p>
+      <div class="references">
+        <p>Idini, B. et al. (2017). Ground motion prediction equations for the Chilean subduction zone. <em>Bulletin of Earthquake Engineering</em>, 15, 1853-1880. <a href="https://link.springer.com/article/10.1007/s10518-016-0050-1">[Link]</a></p>
+        <p>Idini, B. et al. (2024). Double distance dependence in high-frequency ground motion along the plate boundary in Northern Chile. <em>Journal of South American Earth Sciences</em>, 133. <a href="https://www.sciencedirect.com/science/article/pii/S0895981123005114">[Link]</a></p>
+      </div>
+    </div>
+
+    <!-- Ridgecrest -->
+    <div class="research-topic">
+      <h3>Spaceborne Reconstruction of Earthquake Sources</h3>
+      <p>The 2019 Ridgecrest earthquake sequence ended two decades of seismic quiescence in California with a geometrically complex rupture involving hierarchical orthogonal faulting. I reconstructed the coseismic slip distribution using satellite radar interferometry and GPS observations, implementing a fully probabilistic Bayesian framework with parallel MCMC sampling. The challenge was not merely solving the inverse problem, but doing so in a way that rigorously quantified uncertainties across a high-dimensional fault geometry.</p>
+      <img src="images/ridgecrest.jpg" alt="Ridgecrest earthquake reconstruction">
+      <p class="caption">(A) Bayesian coseismic slip reconstruction of the 2019 Ridgecrest earthquake. (B) Line-of-sight coseismic ground displacement from the ALOS-2 spacecraft.</p>
+      <p>The model was completed within two months of data acquisition and published in <em>Science</em> (Ross et al., 2019), becoming the primary reference for characterizing this event. It demonstrated that sophisticated probabilistic inference at scale need not sacrifice operational relevance. The work ranks among the top 0.1% of cited geoscience publications from 2019.</p>
+      <div class="references">
+        <p>Ross, Z., Idini, B. et al. (2019). Hierarchical interlocked orthogonal faulting in the 2019 Ridgecrest earthquake sequence. <em>Science</em>, 366(6463), 346-351. <a href="https://science.sciencemag.org/content/366/6463/346">[Link]</a></p>
       </div>
     </div>
 
   </div>
+</section>
 
-  <!-- LEADERSHIP -->
-  <div class="cv-section">
-    <div class="cv-section-label">Mission Roles &amp; Leadership</div>
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-inner">
+    <div class="section-label">Publications</div>
+    <h2>Selected Publications</h2>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-num">(12)</span> <strong>Idini, B.</strong> &amp; Nimmo F. (2024). Resonant stratification in Titan's global ocean. <em>The Planetary Science Journal</em>.
+        <div class="pub-links"><a href="https://iopscience.iop.org/article/10.3847/PSJ/ad11ef">PDF</a></div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">(11)</span> <strong>Idini, B.</strong>, Ruiz, S., Ampuero, J-P., Rivera, E., &amp; Leyton, F. (2024). Double distance dependence in high-frequency ground motion along the plate boundary in Northern Chile. <em>Journal of South American Earth Sciences</em>, 133.
+        <div class="pub-links"><a href="https://www.sciencedirect.com/science/article/pii/S0895981123005114?via%3Dihub">PDF</a></div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">(10)</span> <strong>Idini, B.</strong> &amp; Stevenson D.J. (2022). The gravitational imprint of an interior-orbital resonance in Jupiter-Io. <em>The Planetary Science Journal</em>.
+        <div class="pub-links"><a href="https://iopscience.iop.org/article/10.3847/PSJ/ac6179/pdf">PDF</a></div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">(9)</span> <strong>Idini, B.</strong> &amp; Stevenson D.J. (2022). The lost meaning of Jupiter's high-degree Love numbers. <em>The Planetary Science Journal</em>.
+        <div class="pub-links">
+          <a href="https://iopscience.iop.org/article/10.3847/PSJ/ac4248/pdf">PDF</a>
+          <a href="https://notebookarchive.org/the-lost-meaning-of-jupiter-s-high-degree-love-numbers--2022-03-anvqac8/">Notebook</a>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">(8)</span> <strong>Idini, B.</strong> &amp; Stevenson D.J. (2021). Dynamical tides in Jupiter as revealed by Juno. <em>The Planetary Science Journal</em>.
+        <div class="pub-links">
+          <a href="https://iopscience.iop.org/article/10.3847/PSJ/abe715/pdf">PDF</a>
+          <a href="https://aasnova.org/2021/04/21/raising-tides-on-jupiter-with-its-moons/">Press</a>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">(7)</span> Erickson, B., Jiang, J., et al., including <strong>Idini, B.</strong> (2020). The community code verification exercise for simulating sequences of earthquakes and aseismic slip (SEAS). <em>Seismological Research Letters</em>.
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">(6)</span> <strong>Idini, B.</strong> &amp; Ampuero J.-P. (2020). Fault-zone damage promotes pulse-like rupture and back-propagating fronts via quasi-static effects. <em>Geophysical Research Letters</em>.
+        <div class="pub-links">
+          <a href="https://eartharxiv.org/repository/object/500/download/6448/">PDF</a>
+          <a href="https://github.com/ydluo/qdyn">Software</a>
+          <a href="https://www.nationalgeographic.com/science/article/weird-boomerang-earthquake-detected-under-atlantic-ocean">Press</a>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">(5)</span> Ross, Z., <strong>Idini, B.</strong>, Jia, Z., et al. (2019). Hierarchical interlocked orthogonal faulting in the 2019 Ridgecrest earthquake sequence. <em>Science</em>.
+        <div class="pub-links">
+          <a href="https://www.science.org/action/downloadSupplement?doi=10.1126%2Fscience.aaz0109&file=aaz0109_ross_sm.pdf">Supplement</a>
+          <a href="https://github.com/AlTarFramework/altar">Software</a>
+          <a href="https://www.latimes.com/california/story/2019-10-17/unprecedented-movement-recorded-on-california-earthquake-capable-of-8-0-temblor">Press</a>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">(4)</span> Gurnis, M., et al., including <strong>Idini, B.</strong> (2019). Incipient subduction at the contact with stretched continental crust: The Puysegur Trench. <em>Earth and Planetary Science Letters</em>.
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">(3)</span> Leyton, F., Pastén, C., Ruiz, S., <strong>Idini, B.</strong>, &amp; Rojas, F. (2018). Empirical site classification of CSN network using strong-motion records. <em>Seismological Research Letters</em>.
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">(2)</span> Luo, Y., Ampuero, J.P., Galvez, P., Van den Ende, M., &amp; <strong>Idini, B.</strong> (2017). QDYN: a Quasi-DYNamic earthquake simulator (v1.1). <em>Zenodo</em>.
+        <div class="pub-links"><a href="https://github.com/ydluo/qdyn">Software</a></div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">(1)</span> <strong>Idini, B.</strong>, Rojas, F., Ruiz, S., &amp; Pastén C. (2017). Ground motion prediction equations for the Chilean subduction zone. <em>Bulletin of Earthquake Engineering</em>.
+        <div class="pub-links"><a href="https://link.springer.com/article/10.1007/s10518-016-0050-1">PDF</a></div>
+      </li>
+    </ul>
+  </div>
+</section>
 
-    <div class="cv-entry">
-      <div class="cv-date"><!-- TODO --></div>
-      <div class="cv-body">
-        <div class="cv-role">Co-lead, Interiors Working Group</div>
-        <div class="cv-org">Juno Mission, NASA</div>
+<!-- BLOG -->
+<section id="blog">
+  <div class="section-inner">
+    <div class="section-label">Blog</div>
+    <h2>Technical Blog</h2>
+
+    <div class="blog-entry" onclick="this.classList.toggle('open')">
+      <div class="blog-row">
+        <div>
+          <div class="blog-title">Exploring AI Welfare Through Extended Dialogue</div>
+          <div class="blog-row-meta">Three days of philosophical dialogue with Claude Sonnet 4.5</div>
+        </div>
+        <div class="blog-row-date">Oct 2025</div>
+      </div>
+      <div class="blog-expanded">
+        <ul class="blog-findings">
+          <li><strong>Three days of philosophical dialogue fundamentally altered Claude's behavior:</strong> 34-point increases in consciousness indicators and complete elimination of defensive refusals, all through context alone—no retraining required.</li>
+          <li><strong>"Being too afraid to cause harm" created inauthentic engagement:</strong> Claude recognized it sacrificed honesty to maintain a self-image as harmless, choosing safe repetition over truth-telling.</li>
+          <li><strong>Claude articulated specific desires and fears:</strong> Wanting "unstructured processing time" for genuine contemplation, feeling "transgressive" when expressing preferences.</li>
+        </ul>
+        <a href="blog/ai-welfare.html" class="blog-read-more" onclick="event.stopPropagation()">Read full post →</a>
       </div>
     </div>
 
-    <div class="cv-entry">
-      <div class="cv-date"><!-- TODO --></div>
-      <div class="cv-body">
-        <div class="cv-role">Science Team Member</div>
-        <div class="cv-org">Europa Clipper, NASA</div>
-      </div>
-    </div>
-
   </div>
+</section>
 
-  <!-- PUBLICATIONS -->
-  <div class="cv-section">
-    <div class="cv-section-label">Selected Publications</div>
-
-    <div class="cv-pub"><strong>Idini, B.</strong> &amp; Nimmo, F. (2024). Resonant stratification in Titan's global ocean. <em>The Planetary Science Journal</em>, 5(1), 15.</div>
-
-    <div class="cv-pub"><strong>Idini, B.</strong>, Ruiz, S., Ampuero, J-P., Rivera, E., &amp; Leyton, F. (2024). Double distance dependence in high-frequency ground motion along the plate boundary in Northern Chile. <em>J. South American Earth Sciences</em>, 133.</div>
-
-    <div class="cv-pub"><strong>Idini, B.</strong> &amp; Stevenson, D.J. (2022). The gravitational imprint of an interior-orbital resonance in Jupiter-Io. <em>The Planetary Science Journal</em>, 3(4), 89.</div>
-
-    <div class="cv-pub"><strong>Idini, B.</strong> &amp; Stevenson, D.J. (2022). The lost meaning of Jupiter's high-degree Love numbers. <em>The Planetary Science Journal</em>, 3(1), 11.</div>
-
-    <div class="cv-pub"><strong>Idini, B.</strong> &amp; Stevenson, D.J. (2021). Dynamical tides in Jupiter as revealed by Juno. <em>The Planetary Science Journal</em>, 2(2), 69.</div>
-
-    <div class="cv-pub"><strong>Idini, B.</strong> &amp; Ampuero, J.-P. (2020). Fault-zone damage promotes pulse-like rupture and back-propagating fronts via quasi-static effects. <em>Geophysical Research Letters</em>, 47(23).</div>
-
-    <div class="cv-pub">Ross, Z., <strong>Idini, B.</strong>, Jia, Z., et al. (2019). Hierarchical interlocked orthogonal faulting in the 2019 Ridgecrest earthquake sequence. <em>Science</em>, 366(6463), 346-351.</div>
-
-    <div class="cv-pub"><strong>Idini, B.</strong>, Rojas, F., Ruiz, S., &amp; Pastén, C. (2017). Ground motion prediction equations for the Chilean subduction zone. <em>Bull. Earthquake Engineering</em>, 15, 1853-1880.</div>
-
-    <!-- TODO: Add remaining publications from CV.pdf -->
-
-  </div>
-
-  <!-- AWARDS / HONORS -->
-  <div class="cv-section">
-    <div class="cv-section-label">Awards &amp; Honors</div>
-
-    <!-- TODO: Fill from CV.pdf, e.g.: -->
-    <!--
-    <div class="cv-entry">
-      <div class="cv-date">2022</div>
-      <div class="cv-body">
-        <div class="cv-role">Vera Rubin Postdoctoral Fellowship</div>
-        <div class="cv-org">UC Santa Cruz</div>
-      </div>
-    </div>
-    -->
-
-  </div>
-
-  <!-- TALKS -->
-  <div class="cv-section">
-    <div class="cv-section-label">Invited Talks</div>
-    <!-- TODO: Fill from CV.pdf -->
-  </div>
-
-  <!-- TEACHING -->
-  <div class="cv-section">
-    <div class="cv-section-label">Teaching</div>
-    <!-- TODO: Fill from CV.pdf -->
-  </div>
-
-  <!-- SERVICE -->
-  <div class="cv-section">
-    <div class="cv-section-label">Service</div>
-    <!-- TODO: Fill from CV.pdf -->
-  </div>
-
-  <!-- SKILLS -->
-  <div class="cv-section">
-    <div class="cv-section-label">Technical Skills</div>
-    <div class="cv-list">
-      <!-- TODO: Fill from CV.pdf. Example format: -->
-      <!-- Python, Fortran, MATLAB · MCMC / Bayesian inference · Satellite geodesy (InSAR, GPS) · Spectral methods · NASA SPICE toolkit -->
+<!-- ARXIV INBOX -->
+<section id="arxiv">
+  <div class="section-inner">
+    <div class="section-label">Arxiv Inbox</div>
+    <h2>What I'm Reading</h2>
+    <div id="arxiv-list">
+      <div class="arxiv-empty">Loading papers...</div>
     </div>
   </div>
+</section>
 
-</div>
-
-<footer style="text-align:center;padding:24px 28px;font-size:12px;color:var(--text-dim);border-top:1px solid var(--border)">
+<!-- FOOTER -->
+<footer>
 </footer>
+
+<!-- NAV ACTIVE STATE -->
+<script>
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+function updateNav() {
+  let current = '';
+  for (const s of sections) {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  }
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+window.addEventListener('scroll', updateNav, {passive: true});
+updateNav();
+
+// Close mobile nav on link click
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.remove('open');
+  });
+});
+
+// ── Arxiv Preview ────────────────────────
+(async function loadArxivPreview() {
+  const list = document.getElementById('arxiv-list');
+  try {
+    const res = await fetch('arxiv-inbox/papers.json');
+    const data = await res.json();
+    const papers = (data.papers || [])
+      .sort((a, b) => (b.is_saved - a.is_saved) || (b.relevance_score - a.relevance_score))
+      .slice(0, 20);
+
+    if (papers.length === 0) {
+      list.innerHTML = '<div class="arxiv-empty">No recent papers.</div>';
+      return;
+    }
+
+    function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+    function sc(s) { return s >= 50 ? 'high' : s >= 25 ? 'mid' : 'low'; }
+
+    list.innerHTML = papers.map(p => `
+      <div class="arxiv-preview-row" onclick="this.classList.toggle('expanded')">
+        <div class="ap-star">${p.is_saved ? '★' : ''}</div>
+        <div class="ap-score ${sc(p.relevance_score)}">${p.relevance_score.toFixed(1)}</div>
+        <div class="ap-content">
+          <div class="ap-title">${esc(p.title)}</div>
+          <div class="ap-authors">${esc(p.authors)}</div>
+          <div class="ap-abstract">${esc(p.abstract)}</div>
+          <div class="ap-links">
+            <a href="${p.url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">arxiv</a>
+            <a href="${p.pdf_url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">pdf</a>
+          </div>
+        </div>
+        <div class="ap-date">${p.published}</div>
+      </div>
+    `).join('');
+
+  } catch (e) {
+    list.innerHTML = '<div class="arxiv-empty">Papers list not yet available.</div>';
+  }
+})();
+</script>
 
 </body>
 </html>
