@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arxiv Inbox — Benjamin Idini</title>
+<meta name="description" content="Relevance-ranked feed of recent papers in planetary science and astrophysical instrumentation.">
+<style>
+  :root {
+    --bg: #1b1f2b;
+    --surface: #232839;
+    --surface2: #2a3045;
+    --border: #333a50;
+    --text: #dddde8;
+    --text-dim: #8a8aa4;
+    --accent: #6c8cff;
+    --accent-dim: #4a5f99;
+    --score-high: #5cb85c;
+    --score-mid: #c4a94c;
+    --score-low: #7a7a90;
+    --link: #7eaaff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── Header ─────────────────────────── */
+  .site-header {
+    text-align: center;
+    padding: 48px 20px 20px;
+  }
+
+  .site-header h1 {
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .site-header h1 span { color: var(--accent); font-weight: 600; }
+
+  .site-header p {
+    font-size: 14px;
+    color: var(--text-dim);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .site-header .back-link {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .generated-info {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-dim);
+    padding: 8px 20px 4px;
+  }
+
+  /* ── Controls ───────────────────────── */
+  .controls {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 5px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+  .filter-btn:hover { border-color: var(--accent-dim); color: var(--text); }
+  .filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .spacer { flex: 1; }
+
+  .sort-select {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: inherit;
+  }
+
+  .paper-count {
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  /* ── Paper list ─────────────────────── */
+  .paper-list {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .paper-row {
+    display: grid;
+    grid-template-columns: 24px 54px 1fr auto;
+    align-items: start;
+    gap: 14px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .paper-row:hover { background: var(--surface); }
+
+  .saved-star {
+    font-size: 16px;
+    color: #e8a838;
+    padding-top: 1px;
+  }
+
+  .score-badge {
+    font-size: 14px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    padding: 2px 0;
+    text-align: right;
+  }
+  .score-high { color: var(--score-high); }
+  .score-mid { color: var(--score-mid); }
+  .score-low { color: var(--score-low); }
+
+  .paper-content { min-width: 0; }
+
+  .paper-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .paper-meta {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .paper-abstract {
+    display: none;
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 10px;
+    line-height: 1.6;
+  }
+  .paper-row.expanded .paper-abstract { display: block; }
+
+  .paper-links {
+    display: none;
+    margin-top: 10px;
+    gap: 14px;
+  }
+  .paper-row.expanded .paper-links { display: flex; }
+  .paper-links a { font-size: 12px; }
+
+  .paper-date {
+    font-size: 12px;
+    color: var(--text-dim);
+    white-space: nowrap;
+    padding-top: 3px;
+  }
+
+  /* ── Footer ─────────────────────────── */
+  .site-footer {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .site-footer a { color: var(--text-dim); }
+
+  .load-more {
+    text-align: center;
+    padding: 20px;
+  }
+  .load-more button {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 8px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+  }
+  .load-more button:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  .empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-dim);
+  }
+
+  @media (max-width: 640px) {
+    .paper-row { grid-template-columns: 20px 44px 1fr; padding: 10px 16px; }
+    .paper-date { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <h1><span>Arxiv</span> Inbox</h1>
+  <p>Recent papers in Earth &amp; Planetary Astrophysics and Instrumentation, ranked by relevance to my research.</p>
+  <a class="back-link" href="/">← back to main site</a>
+</div>
+
+<div class="generated-info" id="generated-info"></div>
+
+<div class="controls">
+  <span class="paper-count" id="paper-count"></span>
+  <span class="spacer"></span>
+  <select class="sort-select" id="sort-select">
+    <option value="relevance">Relevance ↓</option>
+    <option value="date">Newest first</option>
+  </select>
+</div>
+
+<div class="paper-list" id="paper-list">
+  <div class="empty">Loading papers...</div>
+</div>
+
+<div class="load-more" id="load-more" style="display:none;">
+  <button onclick="showMore()">Show more</button>
+</div>
+
+<div class="site-footer">
+</div>
+
+<script>
+let allPapers = [];
+let filtered = [];
+let shown = 0;
+const PAGE = 100;
+
+async function init() {
+  try {
+    const res = await fetch('papers.json');
+    const data = await res.json();
+    allPapers = data.papers || [];
+    const gen = new Date(data.generated);
+    document.getElementById('generated-info').textContent =
+      `Last updated: ${gen.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
+    applyFilters();
+  } catch (e) {
+    document.getElementById('paper-list').innerHTML =
+      '<div class="empty">Could not load papers.json</div>';
+  }
+}
+
+function applyFilters() {
+  const sort = document.getElementById('sort-select').value;
+
+  filtered = [...allPapers];
+
+  // Saved papers always on top, then sort by chosen criterion
+  if (sort === 'date') {
+    filtered.sort((a, b) => (b.is_saved - a.is_saved) || b.published.localeCompare(a.published));
+  } else {
+    filtered.sort((a, b) => (b.is_saved - a.is_saved) || (b.relevance_score - a.relevance_score));
+  }
+
+  shown = 0;
+  document.getElementById('paper-list').innerHTML = '';
+  showMore();
+  document.getElementById('paper-count').textContent = `${filtered.length} papers`;
+}
+
+function scoreClass(s) {
+  if (s >= 50) return 'score-high';
+  if (s >= 25) return 'score-mid';
+  return 'score-low';
+}
+
+function esc(s) {
+  const d = document.createElement('div');
+  d.textContent = s || '';
+  return d.innerHTML;
+}
+
+function showMore() {
+  const batch = filtered.slice(shown, shown + PAGE);
+  if (batch.length === 0 && shown === 0) {
+    document.getElementById('paper-list').innerHTML =
+      '<div class="empty">No papers found for this period.</div>';
+    document.getElementById('load-more').style.display = 'none';
+    return;
+  }
+
+  const html = batch.map(p => `
+    <div class="paper-row" onclick="this.classList.toggle('expanded')">
+      <div class="saved-star">${p.is_saved ? '★' : ''}</div>
+      <div class="score-badge ${scoreClass(p.relevance_score)}">${p.relevance_score.toFixed(1)}</div>
+      <div class="paper-content">
+        <div class="paper-title">${esc(p.title)}</div>
+        <div class="paper-meta">${esc(p.authors)}</div>
+        <div class="paper-abstract">${esc(p.abstract)}</div>
+        <div class="paper-links">
+          <a href="${p.url}" target="_blank" rel="noopener">arxiv</a>
+          <a href="${p.pdf_url}" target="_blank" rel="noopener">pdf</a>
+        </div>
+      </div>
+      <div class="paper-date">${p.published}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('paper-list').insertAdjacentHTML('beforeend', html);
+  shown += batch.length;
+  document.getElementById('load-more').style.display =
+    shown < filtered.length ? '' : 'none';
+}
+
+document.getElementById('sort-select').onchange = () => applyFilters();
+
+init();
+</script>
+</body>
+</html>
